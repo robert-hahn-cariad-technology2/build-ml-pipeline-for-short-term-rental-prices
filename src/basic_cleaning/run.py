@@ -19,8 +19,7 @@ def go(args):
     logger.info("cleaning data")
     run.config.update(args)
 
-    artifact_dir = run.use_artifact(args.input_artifact).download()
-    local_path = os.path.join(artifact_dir, "sample1.csv")
+    local_path = run.use_artifact(args.input_artifact).file()
     df = pd.read_csv(local_path)
 
     idx = df['price'].between(args.min_price, args.max_price)
